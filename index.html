@@ -1,50 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-
-scale=1.0">
-<title>HBD</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HBD</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    window.addEventListener('load', function () {
+      emailjs.init("JPdXtzstHECwQ9p5W");
+
+      document.getElementById('wishForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const status = document.getElementById('form-status');
+        status.textContent = "Sending...";
+        status.style.color = "#580803";
+
+        emailjs.sendForm('service_kl1z53z', 'template_g3xwblo', this)
+          .then(() => {
+            status.textContent = "🎉 Wish sent! Thank you so much!";
+            status.style.color = "#e91e8c";
+            this.reset();
+          })
+          .catch(() => {
+            status.textContent = "Oops! Something went wrong. Try again.";
+            status.style.color = "red";
+          });
+      });
+    });
+  </script>
 </head>
 <body>
-<div class="card">
-<div class="back"></div>
-<div class="front">
-<div class="hover-text">Hover To Open</div>
-<div class="cover-shape-large">
-<div class="shape-diamond"></div>
-<div class="shape-block"></div>
-</div>
-<div class="cover-shape-small">
-<div class="shape-diamond"></div>
-<div class="shape-block">
-<div class="cake">
-<div class="layer layer-bottom"></div>
-<div class="layer layer-middle"></div>
-<div class="layer layer-top"></div>
-<div class="icing"></div>
-<div class="drip dripl"></div>
-<div class="drip drip2"></div>
-<div class="drip drip3"></div>
-<div class="candle">
-<div class="flame"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="text-container">
-    <img src="./img/WhatsApp Image 2026-04-27 at 01.26.39.jpeg" alt="Special Memory" class="memory-photo">
-<p id="head">Happy Birthday To Me!</p>
-<div>
-    Today is my special day—a celebration of my journey,
-    my growth, and all the beautiful moments that have shaped me.
-    I am grateful for another year of life, new experiences,
-    and endless opportunities ahead.
-</div>
-<p>Cheers to another amazing year ahead!</p>
-</div>
-</div>
+
+  <div class="card">
+    <div class="back"></div>
+    <div class="front">
+      <div class="hover-text">Hover To Open</div>
+      <div class="cover-shape-large">
+        <div class="shape-diamond"></div>
+        <div class="shape-block"></div>
+      </div>
+      <div class="cover-shape-small">
+        <div class="shape-diamond"></div>
+        <div class="shape-block">
+          <div class="cake">
+            <div class="layer layer-bottom"></div>
+            <div class="layer layer-middle"></div>
+            <div class="layer layer-top"></div>
+            <div class="icing"></div>
+            <div class="drip drip1"></div><!-- Fixed: was "dripl" -->
+            <div class="drip drip2"></div>
+            <div class="drip drip3"></div>
+            <div class="candle">
+              <div class="flame"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-container">
+      <img src="./img/WhatsApp Image 2026-04-27 at 01.26.39.jpeg" alt="Special Memory" class="memory-photo">
+      <p id="head">Happy Birthday To Me!</p>
+      <div class="body-text">
+        Today is my special day—a celebration of my journey,
+        my growth, and all the beautiful moments that have shaped me.
+        I am grateful for another year of life, new experiences,
+        and endless opportunities ahead.
+      </div>
+      <p>Cheers to another amazing year ahead!</p>
+
+      <div class="message-section">
+        <h2 class="message-title">🎉 Leave Me a Birthday Wish!</h2>
+        <form id="wishForm" class="wish-form">
+          <input type="text" name="from_name" placeholder="Your name" required class="wish-input" />
+          <input type="email" name="reply_to" placeholder="Your email (optional)" class="wish-input" />
+          <textarea name="message" placeholder="Write your birthday wish here... 🎂" required class="wish-textarea"></textarea>
+          <button type="submit" class="wish-btn">Send Wish 💌</button>
+          <p id="form-status" class="form-status"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
